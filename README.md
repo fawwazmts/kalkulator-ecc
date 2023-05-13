@@ -8,4 +8,4 @@ This project has 4 feature, those are:
 - calculates the spreading of elliptic curve points defined on the elliptic curve
 - calculate the elliptic curve diffie hellman public key and secret key.
 
-This project can be accessed online using [Kalkulator ECC](https://pages.github.com/).
+This project can be accessed online using [Kalkulator ECC](https://kalkulator-ecc.netlify.app/).
