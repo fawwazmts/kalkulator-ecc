@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator Kurva Eliptik - Pelelaran Titik</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <section class="container">
+      <nav class="navbar py-3 border-bottom">
+        <a href="/index.html" class="navbar-brand app-name">Kalkulator ECC</a>
+        <a
+          class="fill-transition"
+          data-bs-toggle="offcanvas"
+          href="#offcanvasExample"
+          role="button"
+          aria-controls="offcanvasExample"
+        >
+          Menu
+        </a>
+        <div
+          class="offcanvas offcanvas-end p-4"
+          tabindex="-1"
+          id="offcanvasExample"
+          aria-labelledby="offcanvasExampleLabel"
+        >
+          <div class="offcanvas-header mb-4">
+            <h5 class="offcanvas-title app-name" id="offcanvasExampleLabel">
+              Kalkulator ECC
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav gap-4">
+              <li class="nav-item d-inline">
+                <a
+                  href="/titik-kurva.html"
+                  class="nav-link py-2 px-3 swap-transition"
+                >
+                  Titik pada Kurva Eliptik
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/penjumlahan-titik.html"
+                  class="nav-link py-2 px-3 swap-transition"
+                  >Penjumlahan Titik</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/pelelaran-titik.html"
+                  class="nav-link py-2 px-3 swap-transition"
+                  >Pelelaran Titik</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/ecdh.html"
+                  class="nav-link py-2 px-3 swap-transition active"
+                  >Eliptic Curve Diffie Helman</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="title py-5">
+        <h1>Eliptic Curve Diffie Helman</h1>
+        <p>
+          Melakukan algoritma pertukaran kunci Diffie-Helman dalam kurva eliptik
+          pada <em>Galois Field</em>
+        </p>
+      </div>
+      <div class="content">
+        <hr />
+
+        <!-- Accordion Pengantar ECDH -->
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                Pengantar
+              </button>
+            </h2>
+            <div
+              id="collapseThree"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                <div>
+                  <p class="mb-0">
+                    Alice dan Bob akan melakukan pertukaran kunci menggunakan
+                    Eliptic Curve Diffie Helman.
+                  </p>
+                  <p class="mb-0">
+                    Alice dan Bob akan memiliki kunci privat dan kunci publik.
+                  </p>
+                  <p class="mb-0">Misalkan:</p>
+                  <ul>
+                    <li>Alice memiliki kunci rahasia x dan kunci publik P</li>
+                    <li>Bob memiliki kunci rahasia y dan kunci publik Q</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="fs-1 fw-600">Hitung Kunci Publik</h4>
+                  <p class="mb-0">
+                    Langkah-langkah yang dilakukan untuk menghitung kunci publik
+                    sebagai berikut.
+                  </p>
+                  <ol>
+                    <li>Pilih persamaan kurva eliptik</li>
+                    <li>
+                      Pilih titik basis (B) dari kurva eliptik yang dipilih
+                      sebelumnya
+                    </li>
+                    <li>Pilih kunci privat (x) berupa bilangan bulat</li>
+                    <li>Hitung kunci publik (P), P = x.B</li>
+                    <li>Kirim kunci publik (P), misalkan dari Alice ke Bob</li>
+                  </ol>
+                </div>
+                <div>
+                  <h4 class="fs-1 fw-600">Hitung Kunci Rahasia</h4>
+                  <p class="mb-0">
+                    Langkah-langkah yang dilakukan untuk menghitung kunci publik
+                    sebagai berikut.
+                  </p>
+                  <ol>
+                    <li>Pilih kunci rahasia (x)</li>
+                    <li>Dapatkan kunci publik dari orang lain (Q)</li>
+                    <li>Hitung kunci rahasia (K), K = x.Q</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <!-- Himpunan titik persamaan kurva eliptik -->
+        <div class="py-5" id="ellipticCurve">
+          <div>
+            <h3 class="fs-2 fw-600">Pilih persamaan kurva eliptik</h3>
+            <p>Persamaan kurva eliptik yang dipilih, yaitu:</p>
+            <div class="input-group py-2">
+              <span class="input-group-text"
+                >y<sup>2</sup> &#x2630;x <sup>3</sup> +
+              </span>
+              <input
+                type="number"
+                aria-label="a value"
+                id="aValue"
+                class="form-control"
+                data-bs-container="body"
+                data-bs-toggle="popover"
+                data-bs-placement="top"
+                data-bs-trigger="hover focus"
+                data-bs-content="Isi dengan bilangan bulat"
+              />
+              <span class="input-group-text">x + </span>
+              <input
+                type="number"
+                aria-label="b value"
+                id="bValue"
+                class="form-control"
+                data-bs-container="body"
+                data-bs-toggle="popover"
+                data-bs-placement="top"
+                data-bs-trigger="hover focus"
+                data-bs-content="Isi dengan bilangan bulat"
+              />
+              <span class="input-group-text">(mod</span>
+              <input
+                type="number"
+                aria-label="p value"
+                id="pValue"
+                class="form-control"
+                data-bs-container="body"
+                data-bs-toggle="popover"
+                data-bs-placement="top"
+                data-bs-trigger="hover focus"
+                data-bs-content="Isi dengan bilangan prima"
+              />
+              <span class="input-group-text">)</span>
+            </div>
+            <a href="#outputPointSet" class="btn my-btn mt-3" id="btnPointSet"
+              >Hitung titik-titik pada kurva eliptik</a
+            >
+          </div>
+          <div class="alert my-4 visually-hidden" id="outputPointSet">
+            <h4 class="fs-1 fw-600">Hasil</h4>
+            <p id="pointSetResult"></p>
+          </div>
+        </div>
+        <hr />
+
+        <!-- Hitung Kunci Publik -->
+        <div class="py-5">
+          <div>
+            <h3 class="fs-2 fw-600">Hitung Kunci Publik</h3>
+            <p class="mb-0">Misalkan,</p>
+            <ul>
+              <li>
+                Kunci publik yang akan dihitung adalah
+                P(x<sub>p</sub>,y<sub>p</sub>) =
+                k.B(x<sub>b</sub>,y<sub>b</sub>)
+              </li>
+              <li>
+                B(x<sub>b</sub>,y<sub>b</sub>) adalah titik basis yang dipilih
+                dari titik pada kurva eliptik yang dipilih sebelumnya.
+              </li>
+              <li>m adalah kunci privat yang dipilih</li>
+            </ul>
+
+            <div class="d-flex flex-column">
+              <div class="d-flex flex-column my-3">
+                <h4 class="fs-1 fw-600">
+                  Titik Basis B(x<sub>b</sub>,y<sub>b</sub>)
+                </h4>
+                <div class="input-group py-1">
+                  <span class="input-group-text">x<sub>b</sub></span>
+                  <input
+                    type="text"
+                    aria-label="xb value"
+                    id="xbValue"
+                    class="form-control"
+                    data-bs-container="body"
+                    data-bs-toggle="popover"
+                    data-bs-placement="top"
+                    data-bs-trigger="hover focus"
+                    data-bs-content="Isi dengan bilangan bulat"
+                  />
+                </div>
+                <div class="input-group py-1">
+                  <span class="input-group-text">y<sub>b</sub></span>
+                  <input
+                    type="text"
+                    aria-label="yb value"
+                    id="ybValue"
+                    class="form-control"
+                    data-bs-container="body"
+                    data-bs-toggle="popover"
+                    data-bs-placement="top"
+                    data-bs-trigger="hover focus"
+                    data-bs-content="Isi dengan bilangan bulat, kecuali titik infinity isi dengan 'inf'"
+                  />
+                </div>
+              </div>
+              <div class="d-flex flex-column my-3">
+                <h4 class="fs-1 fw-600">Kunci privat</h4>
+                <div class="input-group py-1">
+                  <span class="input-group-text">x</span>
+                  <input
+                    type="text"
+                    aria-label="x value"
+                    id="xValue"
+                    class="form-control"
+                    data-bs-container="body"
+                    data-bs-toggle="popover"
+                    data-bs-placement="top"
+                    data-bs-trigger="hover focus"
+                    data-bs-content="Isi dengan bilangan bulat"
+                  />
+                </div>
+              </div>
+            </div>
+            <a href="#outputPublicKey" class="btn my-btn mt-3" id="btnPublicKey"
+              >Hitung kunci publik</a
+            >
+          </div>
+          <div class="alert my-4 visually-hidden" id="outputPublicKey">
+            <h4 class="fs-1 fw-600">Hasil</h4>
+            <p id="pointPublicKeyResult"></p>
+          </div>
+        </div>
+        <hr />
+
+        <!-- Hitung Kunci Rahasia -->
+        <div class="py-5">
+          <div>
+            <h3 class="fs-2 fw-600">Hitung Kunci Publik</h3>
+            <p class="mb-0">Misalkan,</p>
+            <ul>
+              <li>
+                Kunci rahasia yang akan dihitung adalah
+                K(x<sub>k</sub>,y<sub>x</sub>) =
+                x.Q(x<sub>q</sub>,y<sub>q</sub>)
+              </li>
+              <li>
+                Q(x<sub>q</sub>,y<sub>q</sub>) adalah kunci publik yang
+                diperoleh dari orang lain
+              </li>
+              <li>x adalah kunci privat yang dimiliki</li>
+            </ul>
+
+            <div class="d-flex flex-column">
+              <div class="d-flex flex-column my-3">
+                <h4 class="fs-1 fw-600">
+                  Kunci Publik Q(x<sub>q</sub>,y<sub>q</sub>)
+                </h4>
+                <div class="input-group py-1">
+                  <span class="input-group-text">x<sub>q</sub></span>
+                  <input
+                    type="text"
+                    aria-label="xq value"
+                    id="xqValue"
+                    class="form-control"
+                    data-bs-container="body"
+                    data-bs-toggle="popover"
+                    data-bs-placement="top"
+                    data-bs-trigger="hover focus"
+                    data-bs-content="Isi dengan bilangan bulat"
+                  />
+                </div>
+                <div class="input-group py-1">
+                  <span class="input-group-text">y<sub>q</sub></span>
+                  <input
+                    type="text"
+                    aria-label="yq value"
+                    id="yqValue"
+                    class="form-control"
+                    data-bs-container="body"
+                    data-bs-toggle="popover"
+                    data-bs-placement="top"
+                    data-bs-trigger="hover focus"
+                    data-bs-content="Isi dengan bilangan bulat, kecuali titik infinity isi dengan 'inf'"
+                  />
+                </div>
+              </div>
+              <div class="d-flex flex-column my-3">
+                <h4 class="fs-1 fw-600">Kunci privat</h4>
+                <div class="input-group py-1">
+                  <span class="input-group-text">x</span>
+                  <input
+                    type="text"
+                    aria-label="x value"
+                    id="xSecValue"
+                    class="form-control"
+                    data-bs-container="body"
+                    data-bs-toggle="popover"
+                    data-bs-placement="top"
+                    data-bs-trigger="hover focus"
+                    data-bs-content="Isi dengan bilangan bulat"
+                  />
+                </div>
+              </div>
+            </div>
+            <a href="#outputSecretKey" class="btn my-btn mt-3" id="btnSecretKey"
+              >Hitung kunci publik</a
+            >
+          </div>
+          <div class="alert my-4 visually-hidden" id="outputSecretKey">
+            <h4 class="fs-1 fw-600">Hasil</h4>
+            <p id="pointSecretKeyResult"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/ecdh.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

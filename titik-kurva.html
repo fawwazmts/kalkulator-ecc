@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator Kurva Eliptik - Titik pada Kurva Eliptik</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <section class="container">
+      <nav class="navbar py-3 border-bottom">
+        <a href="/index.html" class="navbar-brand app-name">Kalkulator ECC</a>
+        <a
+          class="fill-transition"
+          data-bs-toggle="offcanvas"
+          href="#offcanvasExample"
+          role="button"
+          aria-controls="offcanvasExample"
+        >
+          Menu
+        </a>
+        <div
+          class="offcanvas offcanvas-end p-4"
+          tabindex="-1"
+          id="offcanvasExample"
+          aria-labelledby="offcanvasExampleLabel"
+        >
+          <div class="offcanvas-header mb-4">
+            <h5 class="offcanvas-title app-name" id="offcanvasExampleLabel">
+              Kalkulator ECC
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav gap-4">
+              <li class="nav-item d-inline">
+                <a
+                  href="/titik-kurva.html"
+                  class="nav-link py-2 px-3 swap-transition active"
+                >
+                  Titik pada Kurva Eliptik
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/penjumlahan-titik.html"
+                  class="nav-link py-2 px-3 swap-transition"
+                  >Penjumlahan Titik</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/pelelaran-titik.html"
+                  class="nav-link py-2 px-3 swap-transition"
+                  >Pelelaran Titik</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="/ecdh.html" class="nav-link py-2 px-3 swap-transition"
+                  >Eliptic Curve Diffie Helman</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="title py-5">
+        <h1>Titik pada Kurva Eliptik</h1>
+        <p>
+          Menentukan semua titik yang memenuhi persamaan kurva eliptik pada
+          Galois Field
+        </p>
+      </div>
+      <div class="content">
+        <hr />
+        <div class="py-5">
+          <div>
+            <h3 class="fs-2 fw-600">Pilih persamaan kurva eliptik</h3>
+            <p>Persamaan kurva eliptik yang dipilih, yaitu:</p>
+            <div class="input-group py-2">
+              <span class="input-group-text"
+                >y<sup>2</sup> &#x2630;x <sup>3</sup> +
+              </span>
+              <input
+                type="number"
+                aria-label="a value"
+                id="aValue"
+                class="form-control"
+                data-bs-container="body"
+                data-bs-toggle="popover"
+                data-bs-placement="top"
+                data-bs-trigger="hover focus"
+                data-bs-content="Isi dengan bilangan bulat"
+              />
+              <span class="input-group-text">x + </span>
+              <input
+                type="number"
+                aria-label="b value"
+                id="bValue"
+                class="form-control"
+                data-bs-container="body"
+                data-bs-toggle="popover"
+                data-bs-placement="top"
+                data-bs-trigger="hover focus"
+                data-bs-content="Isi dengan bilangan bulat"
+              />
+              <span class="input-group-text">(mod</span>
+              <input
+                type="number"
+                aria-label="p value"
+                id="pValue"
+                class="form-control"
+                data-bs-container="body"
+                data-bs-toggle="popover"
+                data-bs-placement="top"
+                data-bs-trigger="hover focus"
+                data-bs-content="Isi dengan bilangan prima"
+              />
+              <span class="input-group-text">)</span>
+            </div>
+            <a href="#outputPointSet" class="btn my-btn mt-3" id="btnPointSet"
+              >Hitung titik-titik pada kurva eliptik</a
+            >
+          </div>
+          <div class="alert my-4 visually-hidden" id="outputPointSet">
+            <h4 class="fs-1 fw-600">Hasil</h4>
+            <p id="pointSetResult"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/ecdh.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
